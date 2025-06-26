@@ -9,6 +9,7 @@ Keyword: Gaza, Conflict in Palestine, Computational Analysis of the Conlict in G
 1 Introduction
 
 2 Literature Review
+
 Select at least four peer-reviewed articles that apply computational social science methods related to your topic. For each article, summarize the following:
 • Research Design
 • Computational Methods Used
@@ -16,15 +17,20 @@ Select at least four peer-reviewed articles that apply computational social scie
 • Limitations
 
 2.1 Research Question
+
 3 Project Design
 3.1 Data Collection Strategy
 3.2 Methodology
+
 4 Results
+
 5 Conclusions Based on Empirical Analysis
 • Empirical Conclusions
 • Connection to Research Question • Evidence-Based Support
+
 5.1 Critical Analysis of the Adopted Strategy
 • Strengths
 • Weaknesses
 • Potential Improvements
+
 6 Reference
