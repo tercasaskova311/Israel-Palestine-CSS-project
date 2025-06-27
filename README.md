@@ -15,7 +15,7 @@ We use two datasets:
 - **Filtered Date Range**: `2025-03-01` to `2025-06-25`
 - **Filtered Columns**: post_created_time, post_title, self_text, post_self_text, score, author_name, full_text,  basic_clean, clean_text
 
-- for using the csv file, read instruction below or use 'reddit_sample.csv' for testing  
+- for using the csv file, read instruction below or use 'reddit_sample.csv' for testing 
 
 ### 2. ACLED Dataset (Real time events)
 
