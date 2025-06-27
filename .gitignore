@@ -1,4 +1,11 @@
-.DS_Store
+
 data/Reddit_data.csv
 data/ACLED_filtered.csv
 data/reddit_samples.csv
+
+# macOS system files
+.DS_Store
+
+# Output plots
+plots/*.png
+
