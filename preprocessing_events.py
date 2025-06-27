@@ -1,5 +1,4 @@
 import pandas as pd
-
 #Load data
 acled = pd.read_csv("/Users/terezasaskova/Desktop/Israel-Palestine-CSS-project/data/ACLED_data.csv")
 
@@ -21,3 +20,4 @@ daily_events = (
               fatalities=('fatalities', 'sum'))
          .reset_index()
 )
+acled.info()
