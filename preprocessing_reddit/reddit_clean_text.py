@@ -29,9 +29,9 @@ def spacy_clean_doc(doc):
 
 # ========== 3. Setup file paths and parameters ==========
 
-input_path = '/Users/terezasaskova/Desktop/Israel-Palestine-CSS-project/Reddit_spring25_filtered.csv'
-output_path_chunks = '/Users/terezasaskova/Desktop/Israel-Palestine-CSS-project/Reddit_cleaned_chunks.csv'
-output_path_final = '/Users/terezasaskova/Desktop/Israel-Palestine-CSS-project/Reddit_cleaned_FINAL.csv'
+input_path = '../dataReddit_spring25_filtered.csv'
+output_path_chunks = '../dataReddit_cleaned_chunks.csv'
+output_path_final = '../dataReddit_cleaned_FINAL.csv'
 
 chunk_size = 1000
 max_words = 500
@@ -40,36 +40,37 @@ all_clean_chunks = []
 
 # ========== 4. Process and clean the CSV in chunks ==========
 
-for chunk in pd.read_csv(input_path, chunksize=chunk_size):
-    # --- Combine text columns into full_text ---
-    chunk['full_text'] = (
-        chunk['post_title'].fillna('') + ' ' +
-        chunk['post_self_text'].fillna('') + ' ' +
-        chunk['self_text'].fillna('')
-    )
+with pd.read_csv(input_path, chunksize=chunk_size) as reader:
+    for chunk in reader:
+        # --- Combine text columns into full_text ---
+        chunk['full_text'] = (
+            chunk['post_title'].fillna('') + ' ' +
+            chunk['post_self_text'].fillna('') + ' ' +
+            chunk['self_text'].fillna('')
+        ).str.strip()
 
-    # --- Truncate long posts (max 500 words) ---
-    chunk['full_text'] = chunk['full_text'].apply(lambda x: ' '.join(x.split()[:max_words]))
+        # --- Truncate long posts (max 500 words) ---
+        chunk['full_text'] = chunk['full_text'].apply(lambda x: ' '.join(x.split()[:max_words]))
 
-    # --- Apply basic regex cleaning ---
-    chunk['basic_clean'] = chunk['full_text'].progress_apply(basic_cleaning)
+        # --- Apply basic regex cleaning ---
+        chunk['basic_clean'] = chunk['full_text'].progress_apply(basic_cleaning)
 
-    # --- Run spaCy lemmatization in batch mode ---
-    docs = nlp.pipe(chunk['basic_clean'].tolist(), batch_size=32)
-    chunk['clean_text'] = [spacy_clean_doc(doc) for doc in docs]
+        # --- Run spaCy lemmatization in batch mode ---
+        docs = nlp.pipe(chunk['basic_clean'].tolist(), batch_size=32)
+        chunk['clean_text'] = [spacy_clean_doc(doc) for doc in docs]
 
-    # --- Save cleaned chunk with all original columns + clean_text ---
-    chunk.to_csv(
-        output_path_chunks,
-        mode='a',
-        header=first_chunk,
-        index=False
-    )
-    first_chunk = False
+        # --- Save cleaned chunk with all original columns + clean_text ---
+        chunk.to_csv(
+            output_path_chunks,
+            mode='a',
+            header=first_chunk,
+            index=False
+        )
+        first_chunk = False
 
-    # --- Store for final full DataFrame ---
-    all_clean_chunks.append(chunk)
-
+        # --- Store for final full DataFrame ---
+        all_clean_chunks.append(chunk)
+# if we can do this in memory, we can avoid writing to disk multiple times
 # ========== 5. Combine all cleaned chunks ==========
 final_cleaned_df = pd.concat(all_clean_chunks, ignore_index=True)
 
