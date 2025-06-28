@@ -12,7 +12,7 @@ We use two datasets:
 ### 1. Reddit Dataset (Kaggle)
 
 - **Source**: [Reddit on Israel–Palestine – Kaggle](https://www.kaggle.com/datasets/asaniczka/reddit-on-israel-palestine-daily-update)
-- **Filtered Date Range**: `2025-03-01` to `2025-06-25`
+- **Filtered Date Range**: `2025-03-01` to `2025-06-20`
 - **Filtered Columns**: post_created_time, post_title, self_text, post_self_text, score, author_name, full_text,  basic_clean, clean_text
 
 - for using the csv file, read instruction below or use 'reddit_sample.csv' for testing  
@@ -20,7 +20,7 @@ We use two datasets:
 ### 2. ACLED Dataset (Real time events)
 
 - **Source**: [ACLED Gaza Monitor] ()
-- **Filtered Date Range**: `2025-03-01` to `2025-06-25`
+- **Filtered Date Range**: `2025-03-01` to `2025-06-20`
 - **Retained Columns (filtered)**:
 - event_date','event_type','sub_event_type','actor1','civilian_targeting','location','source','notes',fatalities','population_best'.
 
@@ -47,11 +47,11 @@ Dropped Columns:
 ### Full Cleaned Dataset
 - File: `Reddit_cleaned_FINAL.csv`
 - Size: ~2.1 GB
-- Download here: [Google Drive Link](https://drive.google.com/file/d/1PIOZe5zjtaZ9X1lrVZLzEw4GIIB3PT_A/view?usp=sharing)
+- Download here: [Google Drive Link](https://drive.google.com/drive/folders/1xPD7nhTTRFyQZYfOIJdz3ns3woz-B3uG?usp=sharing)
 
 You can also download it using Python:
 
 ```python
 !pip install gdown
-!gdown 'https://drive.google.com/file/d/1PIOZe5zjtaZ9X1lrVZLzEw4GIIB3PT_A/view?usp=sharing'
+!gdown 'https://drive.google.com/drive/folders/1xPD7nhTTRFyQZYfOIJdz3ns3woz-B3uG?usp=sharing'
 
