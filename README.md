@@ -5,7 +5,7 @@
 
 ---
 
-We examine the **relationship between real-world conflict activity** and **online public discourse**, using:
+We analyse the **relationship between real-world conflict activity** and **online public discourse**, using:
 
 * Time-series smoothing (rolling averages)
 * Normalization for scale comparability
