@@ -1,57 +1,89 @@
-# Israel–Palestine CSS Project
+# **Volume Comparison:** exploratory data analysis and temporal comparison between:
 
-We use two datasets:
-
-1. **Reddit Posts** from Kaggle – covering public discourse around the Israel–Palestine conflict.
-2. **Conflict Events** from ACLED – providing structured, real-world records of violence in Gaza.
+* **Conflict event data** from [ACLED](https://acleddata.com/)
+* **Reddit discourse** from a Kaggle dataset on Israel–Palestine-related posts
 
 ---
 
-## Datasets Used
+We examine the **relationship between real-world conflict activity** and **online public discourse**, using:
 
-### 1. Reddit Dataset (Kaggle)
+* Time-series smoothing (rolling averages)
+* Normalization for scale comparability
+* Dual-axis plots
+* **Cross-correlation** analysis to detect **temporal lags**
+* Annotation of **major conflict events** and **external communication spikes** (mailer events)
 
-- **Source**: [Reddit on Israel–Palestine – Kaggle](https://www.kaggle.com/datasets/asaniczka/reddit-on-israel-palestine-daily-update)
-- **Filtered Date Range**: `2025-03-01` to `2025-06-25`
-- **Filtered Columns**: post_created_time, post_title, self_text, post_self_text, score, author_name, full_text,  basic_clean, clean_text
+---
 
-- for using the csv file, read instruction below or use 'reddit_sample.csv' for testing 
+## Files and Scripts
 
-### 2. ACLED Dataset (Real time events)
+| File                       | Description                                                |
+| -------------------------- | ---------------------------------------------------------- |
+| `frequeny_comparisson.py`  | Main script for plotting time series and cross-correlation |
+| `ACLED_filtered.csv`       | Cleaned and filtered conflict event dataset                |
+| `Reddit_cleaned_FINAL.csv` | Cleaned Reddit posts dataset                               |
+| `plots/`                   | Contains exported visualizations                           |
+| `README.md`                | Project overview and insights                              |
 
-- **Source**: [ACLED Gaza Monitor] ()
-- **Filtered Date Range**: `2025-03-01` to `2025-06-25`
-- **Retained Columns (filtered)**:
-- event_date','event_type','sub_event_type','actor1','civilian_targeting','location','source','notes',fatalities','population_best'.
+---
 
-Dropped Columns:
-- iso, event_id_cnty, data_id, etc.	Internal ACLED metadata, not needed for analysis
-- timestamp	Too granular (datetime), event_date is sufficient
--  source_scale	Useful for journalistic traceability but not for frame/sentiment comparison
-- actor 2 - the other side of conflict + assoc_actor
-- inter1, interacton
-- year, region, country, location, lat + longtitude, geo_precision = we only analysi conlict in Gaza and West Bank, Palestine
-- disorder_type
+## Methodology Overview
 
+### Data Sources
 
-- Creating event category column:  
-    - Battles & Explosions/Remote violence  = Combat
-    - Violence against civilians = Civilian harm
+* ACLED: Real-world conflict events in Gaza & West Bank
+* Reddit: Public discussion related to the conflict (March–June 2025)
 
+### Steps Taken
 
-# Cleaned Reddit Data
+1. **Preprocessing**:
 
-### Sample for Testing
-- `reddit_sample.csv`: A small sample for fast loading and testing.
+   * Aggregated Reddit posts and ACLED events daily
+   * Applied a 7-day centered rolling average for noise reduction
+   * Normalized time series to 0–1 range for visual comparison
 
-### Full Cleaned Dataset
-- File: `Reddit_cleaned_FINAL.csv`
-- Size: ~2.1 GB
-- Download here: [Google Drive Link](https://drive.google.com/file/d/1PIOZe5zjtaZ9X1lrVZLzEw4GIIB3PT_A/view?usp=sharing)
+2. **Major Event Annotation**:
 
-You can also download it using Python:
+   * Identified top 5 most fatal conflict events (civilian-targeted)
+   * Added vertical lines and labels on plots
+   * Added “mailer events” (e.g., external statements, trigger points)
 
-```python
-!pip install gdown
-!gdown 'https://drive.google.com/file/d/1PIOZe5zjtaZ9X1lrVZLzEw4GIIB3PT_A/view?usp=sharing'
+3. **Cross-Correlation Analysis**:
 
+   * Standardized both time series (mean=0, std=1)
+   * Used `scipy.signal.correlate` to compute lag-based similarity
+   * Annotated the peak lag (max correlation) to interpret timing
+
+---
+
+## Key Visualizations
+
+* **Normalized Comparison**: Smoothed, scale-adjusted trends of ACLED vs. Reddit
+* **Dual Y-Axis View**: Absolute volumes with independent y-scales
+* **Cross-Correlation**:
+
+  * Helps reveal **how Reddit discussions lag (or lead) real-world conflict**
+  * For example, a peak at `+7` means Reddit tends to react **7 days after** events
+
+---
+
+## Potential Takeaways for LDA Topic Modeling
+
+This cross-correlation analysis helps us define **when Reddit was most reactive** to conflict events.
+
+These insights will guide the next phase:
+
+###  LDA Topic Modeling Plan
+
+* Focus on **Reddit posts around tragic events** (±3–5 days)
+* Apply **LDA (Latent Dirichlet Allocation)** to extract themes
+* Compare **topics across high-conflict vs. low-conflict periods**
+* Plot **topic trends over time** to map them to the conflict timeline
+
+---
+
+## Dependencies
+
+```bash
+pip install pandas matplotlib seaborn numpy scipy scikit-learn gensim
+```
