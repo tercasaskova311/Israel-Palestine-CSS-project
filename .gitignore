@@ -1,5 +1,4 @@
 .venv/
-data/
 main.ipynb
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -196,3 +195,7 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 .cursorindexingignoredata/Reddit_data.csv
+.DS_Store
+data/Reddit_data.csv
+data/reddit_opinion_PSE_ISR.csv
+
