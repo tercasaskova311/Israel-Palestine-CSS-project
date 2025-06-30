@@ -47,11 +47,11 @@ Dropped Columns:
 ### Full Cleaned Dataset
 - File: `Reddit_cleaned_FINAL.csv`
 - Size: ~2.1 GB
-- Download here: [Google Drive Link](https://drive.google.com/drive/folders/1xPD7nhTTRFyQZYfOIJdz3ns3woz-B3uG?usp=sharing)
+- Download here: [Google Drive Link](https://drive.google.com/file/d/1cNCdbUFpA2SFOPNC5rkMqRMk77beXLWN/view?usp=drive_link)
 
 You can also download it using Python:
 
 ```python
 !pip install gdown
-!gdown 'https://drive.google.com/drive/folders/1xPD7nhTTRFyQZYfOIJdz3ns3woz-B3uG?usp=sharing'
+!gdown 'https://drive.google.com/file/d/1cNCdbUFpA2SFOPNC5rkMqRMk77beXLWN/view?usp=drive_link'
 

@@ -1,6 +1,7 @@
 .venv/
 *.pyc
 data/reddit_cleaned_*.csv
+data/Reddit_cleaned_*.csv
 data/reddit_opinion_*.csv
 data/reddit_emotions_*.csv
 data/reddit_raw_emotions.csv
@@ -201,7 +202,3 @@ cython_debug/
 .cursorindexingignore
 .cursorindexingignoredata/Reddit_data.csv
 .DS_Store
-data/Reddit_data.csv
-data/reddit_opinion_PSE_ISR.csv
-
-data/Reddit_cleaned_FINAL.csv
