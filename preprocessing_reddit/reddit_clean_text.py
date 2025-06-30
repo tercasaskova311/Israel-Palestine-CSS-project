@@ -29,9 +29,9 @@ def spacy_clean_doc(doc):
 
 # ========== 3. Setup file paths and parameters ==========
 
-input_path = '../data/Reddit_spring25_filtered.csv'
-output_path_chunks = '../data/Reddit_cleaned_chunks.csv'
-output_path_final = '../data/Reddit_cleaned_FINAL.csv'
+input_path = 'data/reddit_filtered.csv'
+output_path_chunks = 'data/reddit_cleaned_chunks.csv'
+output_path_final = 'data/reddit_cleaned_final.csv'
 
 chunk_size = 1000
 max_words = 500

@@ -1,5 +1,10 @@
 .venv/
-main.ipynb
+*.pyc
+data/reddit_cleaned_*.csv
+data/reddit_opinion_*.csv
+data/reddit_emotions_*.csv
+data/reddit_raw_emotions.csv
+data/reddit_filtered.csv
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -199,3 +204,4 @@ cython_debug/
 data/Reddit_data.csv
 data/reddit_opinion_PSE_ISR.csv
 
+data/Reddit_cleaned_FINAL.csv
