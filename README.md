@@ -5,12 +5,11 @@ This project analyzes how public discussion on Reddit responds to real-world con
 ---
 
 ## Project Structure
-.
-├── data/ # Cleaned datasets (Reddit, ACLED)
-├── notebooks/ # Jupyter notebooks for analysis
-├── plots/ # Final visualizations
-├── notes/ # Project description for given parts
-└── README.md # Project overview
+─ data/ # Cleaned datasets (Reddit, ACLED)
+─ notebooks/ # Jupyter notebooks for analysis
+─ plots/ # Final visualizations
+─ notes/ # Project description for given parts
+─ README.md # Project overview
 
 ---
 
