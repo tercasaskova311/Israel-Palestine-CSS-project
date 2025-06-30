@@ -1,57 +1,68 @@
-# Israel–Palestine CSS Project
+# Israel–Palestine Conflict & Reddit Discourse (CSS Project)
 
-We use two datasets:
-
-1. **Reddit Posts** from Kaggle – covering public discourse around the Israel–Palestine conflict.
-2. **Conflict Events** from ACLED – providing structured, real-world records of violence in Gaza.
+This project analyzes how public discussion on Reddit responds to real-world conflict events in Gaza and the West Bank. We combine data from **Reddit** (online discourse) and **ACLED** (verified conflict events) to examine temporal relationships using Python-based data science methods.
 
 ---
 
-## Datasets Used
+## Project Structure
+.
+├── data/ # Cleaned datasets (Reddit, ACLED)
+├── notebooks/ # Jupyter notebooks for analysis
+├── plots/ # Final visualizations
+├── notes/ # Project description for given parts
+└── README.md # Project overview
 
-### 1. Reddit Dataset (Kaggle)
+---
 
-- **Source**: [Reddit on Israel–Palestine – Kaggle](https://www.kaggle.com/datasets/asaniczka/reddit-on-israel-palestine-daily-update)
-- **Filtered Date Range**: `2025-03-01` to `2025-06-20`
-- **Filtered Columns**: post_created_time, post_title, self_text, post_self_text, score, author_name, full_text,  basic_clean, clean_text
+##  Research Question
 
-- for using the csv file, read instruction below or use 'reddit_sample.csv' for testing  
+> **To what extent does Reddit discourse — measured by post volume, dominant topics, and sentiment — align with verified real-world conflict events in Palestine?**
 
-### 2. ACLED Dataset (Real time events)
+---
 
-- **Source**: [ACLED Gaza Monitor] ()
-- **Filtered Date Range**: `2025-03-01` to `2025-06-20`
-- **Retained Columns (filtered)**:
-- event_date','event_type','sub_event_type','actor1','civilian_targeting','location','source','notes',fatalities','population_best'.
+## Method Summary
 
-Dropped Columns:
-- iso, event_id_cnty, data_id, etc.	Internal ACLED metadata, not needed for analysis
-- timestamp	Too granular (datetime), event_date is sufficient
--  source_scale	Useful for journalistic traceability but not for frame/sentiment comparison
-- actor 2 - the other side of conflict + assoc_actor
-- inter1, interacton
-- year, region, country, location, lat + longtitude, geo_precision = we only analysi conlict in Gaza and West Bank, Palestine
-- disorder_type
+### Data Sources
 
+- **Reddit Posts** from [Kaggle](https://www.kaggle.com/datasets/asaniczka/reddit-on-israel-palestine-daily-update)  
+- **Conflict Events** from [ACLED](https://acleddata.com/)
 
-- Creating event category column:  
-    - Battles & Explosions/Remote violence  = Combat
-    - Violence against civilians = Civilian harm
+###  Preprocessing
 
+- Reddit text cleaned with regex and lemmatized (spaCy)
+- ACLED data filtered by date and location
+- Created `event_category` column to classify events as:
+  - `"Combat"` → Battles and Explosions/Remote violence
+  - `"Civilian Harm"` → Violence against civilians
 
-# Cleaned Reddit Data
+### Analysis Techniques
 
-### Sample for Testing
-- `reddit_sample.csv`: A small sample for fast loading and testing.
+- Smoothed daily volumes using 7-day centered rolling average
+- Cross-correlation to assess time-lag between online and offline activity
+- Topic modeling with Latent Dirichlet Allocation (LDA)
+- Comment-level sentiment analysis
 
-### Full Cleaned Dataset
-- File: `Reddit_cleaned_FINAL.csv`
-- Size: ~2.1 GB
-- Download here: [Google Drive Link](https://drive.google.com/file/d/1cNCdbUFpA2SFOPNC5rkMqRMk77beXLWN/view?usp=drive_link)
+---
+## Key Findings
 
-You can also download it using Python:
+- **Volume Lag**:  
+  Reddit comment spikes follow real-world conflict spikes with a ~15-day delay  
+  *(Highest cross-correlation: r = 0.56 at lag +15)*
 
-```python
-!pip install gdown
-!gdown 'https://drive.google.com/file/d/1cNCdbUFpA2SFOPNC5rkMqRMk77beXLWN/view?usp=drive_link'
+- **Thematic Shifts**:  
+  Reddit topics intensified around:
+  - **Military conflict** (e.g., May 18, March 18)
+  - **Humanitarian crises** (e.g., June 17 airstrike on aid convoy)
+  - **Geopolitical blame** (e.g., Topic 3: Iran, Trump, Netanyahu)
+
+- **Selective Engagement**:  
+  Reddit attention is not constant—posts surge after major fatalities but not all conflict events.
+
+---
+
+## Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/tercasaskova311/Israel-Palestine-CSS-project.git
 
