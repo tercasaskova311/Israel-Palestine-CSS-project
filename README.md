@@ -43,7 +43,7 @@ This project analyzes how public discussion on Reddit responds to real-world con
 - Smoothed daily volumes using 7-day centered rolling average
 - Cross-correlation to assess time-lag between online and offline activity
 - Topic modeling with Latent Dirichlet Allocation (LDA)
-- Comment-level sentiment analysis
+- sentiment analysis
 
 ---
 ## Key Findings
